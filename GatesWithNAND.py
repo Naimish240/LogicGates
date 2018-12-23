@@ -143,7 +143,10 @@ class HalfAdder():
         ob1 = XOR(self.Input)
         ob2 = AND(self.Input)
 
-        self.Output = [ob1.Output,ob2.Output]    # S,C        
+        self.Output = [ob1.Output,ob2.Output]    # S,C    
+
+class Adder():
+    pass    
 
 class HalfSubtractor():
     def __init__(self,In=None):
@@ -158,4 +161,7 @@ class HalfSubtractor():
         ob3 = AND([ob2.Output,self.Input[2]])
 
         self.Output = [ob1.Output,ob3.Output]    # D,B
+
+class Subtractor():
+    pass
 
