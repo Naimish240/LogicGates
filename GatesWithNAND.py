@@ -2,6 +2,8 @@
 
 # --- WIP ---
 
+# --- THIS PROGRAM IS DESIGNED FOR INPUTS OF 0 AND 1, AND NO OTHER INPUTS ---
+
 def Input(ch=0):
     if ch:
         return[int(input("Enter the value of pin A: ")),int(input("Enter the value of pin A: "))]
@@ -155,5 +157,5 @@ class HalfSubtractor():
         ob2 = NOT(self.Input[0])
         ob3 = AND([ob2.Output,self.Input[2]])
 
-        self.Output = [ob1.Output,ob3.Output]
+        self.Output = [ob1.Output,ob3.Output]    # D,B
 
