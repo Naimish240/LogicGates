@@ -138,8 +138,22 @@ class HalfAdder():
             self.Input = In
         self.Model = "Half Adder"
 
-        ob1 = XOR(In)
-        ob2 = AND(In)
+        ob1 = XOR(self.Input)
+        ob2 = AND(self.Input)
 
         self.Output = [ob1.Output,ob2.Output]    # S,C        
+
+class HalfSubtractor():
+    def __init__(self,In=None):
+        if not In:
+            self.Input = Input(1)
+        else:
+            self.Input = In
+        self.Model = "Half Subtractor"
+
+        ob1 = XOR(self.Input)
+        ob2 = NOT(self.Input[0])
+        ob3 = AND([ob2.Output,self.Input[2]])
+
+        self.Output = [ob1.Output,ob3.Output]
 
