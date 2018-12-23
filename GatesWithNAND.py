@@ -12,6 +12,7 @@ class NAND(object):
         print(self.Model)
         print("Input : ",self.Input)
         print("Output : ",self.Output)
+        return ''
 
     def getInput(self,a,b):
         self.Input = [a,b]
