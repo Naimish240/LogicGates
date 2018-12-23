@@ -2,13 +2,19 @@
 
 # --- WIP ---
 
+def Input(ch=0):
+    if ch:
+        return[int(input("Enter the value of pin A: ")),int(input("Enter the value of pin A: "))]
+    return [int(input("Enter the input: "))]
+
+
 class NAND(object):
-    def __init__(self,Model = "NAND Gate"):
+    def __init__(self):
         self.Input = [None,None]
         self.Output = None
-        self.Model = Model
+        self.Model = "NAND Gate"
 
-    def __str__(self):
+    def __repr__(self):
         print(self.Model)
         print("Input : ",self.Input)
         print("Output : ",self.Output)
@@ -24,28 +30,116 @@ class NAND(object):
         else:
             self.Output = 1
     
-class AND(NAND):
-    def __init__(self):
-        self.ob1 = NAND("AND Gate")
-        self.ob2 = NAND("AND Gate")
+class AND():
+    def __init__(self,In=None):
+        ob1 = NAND()
+        ob2 = NAND()
+
+        if not In:
+            self.Input = Input(1)
+        else:
+            self.Input = In
 
         self.Model = "AND Gate"
 
         # Calculate the value of first NAND gate 
-        self.ob1.getInput(int(input("Enter the value of pin A: ")),int(input("Enter the value of pin B: ")))
-        self.Input = self.ob1.Input
+        ob1.getInput(self.Input[0],self.Input[1])
+
         # Calculates the value of the second NAND gate
-        self.ob2.getInput(self.ob1.Output,self.ob1.Output)
-        self.Output = self.ob2.Output 
+        ob2.getInput(ob1.Output,ob1.Output)
+        self.Output = ob2.Output 
     
-class NOT(NAND):
-    def __init__(self):
-        self.ob1 = NAND("NOT Gate")
+class NOT():
+    def __init__(self,In = None):
+        self.ob1 = NAND()
 
         self.Model = "NOT Gate"
+        if not In:
+            self.Input = Input()
+        else:
+            self.Input = In
 
-        self.Input = int(input("Enter the input: "))
-        self.ob1.getInput(self.Input,self.Input)
+        self.ob1.getInput(self.Input[0],self.Input[0])
         self.Output = self.ob1.Output
 
+class OR():
+    def __init__(self,In=None):
+        # three gates, since there are three nand gates involved in making an or gate
+        ob1 = NAND()
+        ob2 = NAND()
+        ob3 = NAND()
+
+        self.Model = "OR Gate"
+        if not In:
+            self.Input = Input(1)
+        else:
+            self.Input = In
+        # Evaluating the nand gates to get the equivalent or gate
+        ob1.getInput(self.Input[0],self.Input[0])
+        ob2.getInput(self.Input[1],self.Input[1])
+
+        ob3.getInput(ob1.Output,ob2.Output)
+
+        # saving the output with the or gate
+        self.Output = ob3.Output
+
+class NOR():
+    def __init__(self,In=None):
+        if not In:
+            self.Input = Input(1)
+        else:
+            self.Input = In
+
+        ob1 = OR(In)
+        ob2 = NOT(ob1.Output)
+
+        self.Model = "NOR Gate"
+
+        self.Output = ob2.Output
+
+class XOR():
+    def __init__(self,In=None):
+        if not In:
+            self.Input = Input(1)
+        else:
+            self.Input = In
+        self.Model = "XOR Gate"
+        
+        ob1 = NAND()
+        ob2 = NAND()
+        ob3 = NAND()
+        ob4 = NAND()
+
+        ob1.getInput(self.Input[0],self.Input[1])
+        ob2.getInput(self.Input[0],ob1.Output)
+        ob3.getInput(ob1.Output,self.Input[1])
+        ob4.getInput(ob2.Output,ob3.Output)
+
+        self.Output = ob4.Output
+
+class XNOR():
+    def __init__(self,In=None):
+        if not In:
+            self.Input = Input(1)
+        else:
+            self.Input = In
+        self.Model = "XNOR Gate"
+
+        ob1 = XOR(In)
+        ob2 = NOT([ob1.Output])
+
+        self.Output = ob2.Output
+
+class HalfAdder():
+    def __init__(self,In=None):
+        if not In:
+            self.Input = Input(1)
+        else:
+            self.Input = In
+        self.Model = "Half Adder"
+
+        ob1 = XOR(In)
+        ob2 = AND(In)
+
+        self.Output = [ob1.Output,ob2.Output]    # S,C        
 
