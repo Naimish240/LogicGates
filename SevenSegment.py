@@ -2,10 +2,15 @@
 
 ### WIP ####
 
+from GatesWithNAND import *
+
 vals = [None,None,None,None,None,None,None]
 
 def display():
     '''
+    Note: 0 ---> on
+          1 ---> off
+          
     Numbers:
     
     Display: ABCDEFG
