@@ -10,7 +10,7 @@ def display():
     '''
     Note: 0 ---> on
           1 ---> off
-          
+
     Numbers:
     
     Display: ABCDEFG
@@ -131,8 +131,17 @@ def display():
 
 
     # the list of 7 segment stuff
-    temp = [" ","_"," ","\n","|","_","|","\n","|"," ","|","\n"," ","‾"," ","\n"]
+    temp = [        
+        # Replace '\n' with ' ' when adding two numbers
+                                #        0   1   2   3
+                                
+        [" ","_"," ","\n"],     #   0    0   1   2   3
+        ["|","_","|","\n"],     #   1    4   5   6   7
+        ["|"," ","|","\n"],     #   2    8   9   10  11
+        [" ","‾"," ","\n"]      #   3    12  13  14  15
+    ]
 
+    # Co-ord is temp[i//4][i%4]
     key = [1,6,10,13,8,4,5] # ABCDEFG
 
     
