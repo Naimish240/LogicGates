@@ -5,10 +5,10 @@
 # --- THIS PROGRAM IS DESIGNED FOR INPUTS OF 0 AND 1, AND NO OTHER INPUTS ---
 
 def Input(ch=0):
-    if ch:
-        return[int(input("Enter the value of pin A: ")),int(input("Enter the value of pin A: "))]
-    return [int(input("Enter the input: "))]
+    if ch :
+        return[int(input("Enter the value of pin A: ")),int(input("Enter the value of pin B: "))]
 
+    return [int(input("Enter the input: "))]
 
 class NAND(object):
     def __init__(self):
@@ -34,6 +34,7 @@ class NAND(object):
     
 class AND():
     def __init__(self,In=None):
+        ### In = [num1,num2]
         ob1 = NAND()
         ob2 = NAND()
 
@@ -53,7 +54,8 @@ class AND():
     
 class NOT():
     def __init__(self,In = None):
-        self.ob1 = NAND()
+        ### In = [num1]
+        ob1 = NAND()
 
         self.Model = "NOT Gate"
         if not In:
@@ -61,12 +63,13 @@ class NOT():
         else:
             self.Input = In
 
-        self.ob1.getInput(self.Input[0],self.Input[0])
-        self.Output = self.ob1.Output
+        ob1.getInput(self.Input[0],self.Input[0])
+        self.Output = ob1.Output
 
 class OR():
     def __init__(self,In=None):
-        # three gates, since there are three nand gates involved in making an or gate
+        ### In = [num1,num2]
+        # three gates, since there are three nand gates involved in making an OR gate
         ob1 = NAND()
         ob2 = NAND()
         ob3 = NAND()
@@ -87,13 +90,14 @@ class OR():
 
 class NOR():
     def __init__(self,In=None):
+        ### In = [num1,num2]
         if not In:
             self.Input = Input(1)
         else:
             self.Input = In
 
         ob1 = OR(In)
-        ob2 = NOT(ob1.Output)
+        ob2 = NOT([ob1.Output])
 
         self.Model = "NOR Gate"
 
@@ -134,6 +138,8 @@ class XNOR():
 
 class HalfAdder():
     def __init__(self,In=None):
+        ### In = ['Input 1','Input 2']
+        ### Out = ['Sum','Carry']
         if not In:
             self.Input = Input(1)
         else:
@@ -146,10 +152,22 @@ class HalfAdder():
         self.Output = [ob1.Output,ob2.Output]    # S,C    
 
 class Adder():
-    pass    
+    def __init__(self,In=None):
+        ### In = ['Input 1','Input 2','Carry']
+        ### Out = ['Sum','Carry']
+
+        self.Model = 'One Bit Adder'
+
+        ob1 = HalfAdder([In[0],In[1]])
+        ob2 = HalfAdder([ob1.Output[0],In[2]])
+        ob3 = OR([ob2.Output[1],ob1.Output[1]])
+
+        self.Output = [ob2.Output[0],ob3.Output]
 
 class HalfSubtractor():
     def __init__(self,In=None):
+        ### In = ['Input 1','Input 2']
+        ### Out = ['Difference','Bout']
         if not In:
             self.Input = Input(1)
         else:
@@ -157,11 +175,34 @@ class HalfSubtractor():
         self.Model = "Half Subtractor"
 
         ob1 = XOR(self.Input)
-        ob2 = NOT(self.Input[0])
-        ob3 = AND([ob2.Output,self.Input[2]])
+        ob2 = NOT([self.Input[0]])
+        ob3 = AND([ob2.Output,self.Input[1]])
 
         self.Output = [ob1.Output,ob3.Output]    # D,B
 
 class Subtractor():
-    pass
+    def __init__(self,In=None):
+        ### In = ['Input 1','Input 2','Bout']
+        ### Out = ['Difference','Bout']
 
+        self.Model = 'One Bit Subtractor'
+
+        ob1 = HalfSubtractor([In[0],In[1]])
+        ob2 = HalfSubtractor([ob1.Output[0],In[2]])
+        ob3 = OR([ob2.Output[1],ob1.Output[1]])
+
+        self.Output = [ob2.Output[0],ob3.Output]
+
+class RCA_4Bit():
+    # Four bit Ripple Carry Adder
+
+    def __init__(self,n1,n2):
+        ### n1 = [a,b,c,d] , where a,b,c,d are the number's binary representation bits
+        ### similarly for n2
+
+        # Reversing the numbers
+        t1 = n1[::-1]
+        t2 = n2[::-1]
+
+        ob1 = Adder([t1[0],t2[0],0])
+        ob2 = Adder()
