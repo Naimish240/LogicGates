@@ -52,6 +52,17 @@ class AND():
         ob2.getInput(ob1.Output,ob1.Output)
         self.Output = ob2.Output 
     
+class AND3():
+    # This class exists to and three inputs
+    # Used for K-MAP SOP form
+    def __init__(self,In):
+        self.Input = In
+
+        ob1 = AND([In[0],In[1]])
+        ob2 = AND([ob1.Output,In[2]])
+
+        self.Output = ob2.Output
+
 class NOT():
     def __init__(self,In = None):
         ### In = [num1]
@@ -87,6 +98,17 @@ class OR():
 
         # saving the output with the or gate
         self.Output = ob3.Output
+
+class MultiOR():
+    # This class exists to add multiple inputs with OR gates
+    # used in K-MAP SOP
+    def __init__(self, In):
+        base = OR([In[0],In[1]])
+        temp = [base.Output]
+        for i in range(2,len(In)):
+            ob1 = OR([temp[i-2],In[i]])
+            temp.append(ob1.Output)
+        self.Output = temp[::-1][0]
 
 class NOR():
     def __init__(self,In=None):
@@ -195,14 +217,28 @@ class Subtractor():
 
 class RCA_4Bit():
     # Four bit Ripple Carry Adder
+    # Adds two four bit numbers
+    # Returns a five bit output
 
     def __init__(self,n1,n2):
         ### n1 = [a,b,c,d] , where a,b,c,d are the number's binary representation bits
         ### similarly for n2
 
+        ### Code to ensure all inputs are 8 bits long
+        while (len(n1) != 8):
+            n1.append(0)
+        while (len(n2) != 8):
+            n2.append(0)
+
         # Reversing the numbers
         t1 = n1[::-1]
         t2 = n2[::-1]
 
+        self.Input = [t1,t2]
+
         ob1 = Adder([t1[0],t2[0],0])
-        ob2 = Adder()
+        ob2 = Adder([t1[1],t2[1],ob1.Output[1]])
+        ob3 = Adder([t1[2],t2[2],ob2.Output[1]])
+        ob4 = Adder([t1[3],t2[3],ob3.Output[1]])
+
+        self.Output = [ob4.Output[1],ob4.Output[0],ob3.Output[0],ob2.Output[0],ob1.Output[0]]
