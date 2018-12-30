@@ -141,6 +141,151 @@ temp = [
     ]
 
 # Co-ord is temp[i//4][i%4]
-key = [1,6,10,13,8,4,5] # ABCDEFG
+
+key = {
+    'A' : 1,
+    'B' : 6,
+    'C' : 10,
+    'D' : 13,
+    'E' : 8,
+    'F' : 4,
+    'G' : 5
+    
+}
+def isA(n):
+    # Stores the values
+    # [A,B,C,D]
+    A,B,C,D = n[0], n[1], n[2], n[3]
+    notA = NOT([A])
+    notB = NOT([B])
+    notC = NOT([C])
+    notD = NOT([D])
+
+    ob1 = AND([notB,notD])
+    ob2 = AND([notA,C])
+    ob3 = AND([B,C])
+    ob4 = AND([C,notD])
+    ob5 = AND3([notA,B,D])
+    ob6 = AND3([A,notC,notD])
+    ob7 = AND3([A,notB,notC])
+
+    obj = MultiOR([ob1.Output,ob2.Output,ob3.Output,ob4.Output,ob5.Output,ob6.Output,ob7.Output])
+
+    return obj.Output
+
+def isB(n):
+    # Stores the values
+    # [A,B,C,D]
+    A,B,C,D = n[0], n[1], n[2], n[3]
+    notA = NOT([A])
+    notB = NOT([B])
+    notC = NOT([C])
+    notD = NOT([D])
+
+    ob1 = AND([notB,notD])
+    ob2 = AND3([notA,notC,notD])
+    ob3 = AND3([A,notC,D])
+    ob4 = AND3([notA,C,D])
+    ob5 = AND3([notA,notB,C])
+
+    obj = MultiOR([ob1.Output,ob2.Output,ob3.Output,ob4.Output,ob5.Output])
+
+    return obj.Output
+
+def isC(n):
+    # Stores the values
+    # [A,B,C,D]
+    A,B,C,D = n[0], n[1], n[2], n[3]
+    notA = NOT([A])
+    notB = NOT([B])
+    notC = NOT([C])
+
+    ob1 = AND([notA,notC])
+    ob2 = AND([notA,D])
+    ob3 = AND([notA,B])
+    ob4 = AND([notC,D])
+    ob5 = AND([A,notB])
+
+    obj = MultiOR([ob1.Output,ob2.Output,ob3.Output,ob4.Output,ob5.Output])
+
+    return obj.Output
+
+def isD(n):
+    # Stores the values
+    # [A,B,C,D]
+    A,B,C,D = n[0], n[1], n[2], n[3]
+    notA = NOT([A])
+    notB = NOT([B])
+    notC = NOT([C])
+    notD = NOT([D])
+
+    ob1 = AND([notB,notD])
+    ob2 = AND([C,notD])
+    ob3 = AND3([notA,notB,C])
+    ob4 = AND3([A,notB,notC])
+    ob5 = AND3([B,notC,D])
+
+    obj = MultiOR([ob1.Output,ob2.Output,ob3.Output,ob4.Output,ob5.Output])
+
+    return obj.Output
+
+def isE(n):
+    # Stores the values
+    # [A,B,C,D]
+    A,B,C,D = n[0], n[1], n[2], n[3]
+    notB = NOT([B])
+    notD = NOT([D])
+
+    ob1 = AND([notB,notD])
+    ob2 = AND([C,notD])
+    ob3 = AND([A,B])
+    ob4 = AND([A,C])
+
+    obj = MultiOR([ob1.Output,ob2.Output,ob3.Output,ob4.Output])
+
+    return obj.Output
+
+def isF(n):
+    # Stores the values
+    # [A,B,C,D]
+    A,B,C,D = n[0], n[1], n[2], n[3]
+    notA = NOT([A])
+    notB = NOT([B])
+    notC = NOT([C])
+    notD = NOT([D])
+
+    ob1 = AND([notC,notD])
+    ob2 = AND([A,notB])
+    ob3 = AND([A,C])
+    ob4 = AND3([B,C,notD])
+    ob5 = AND3([notA,B,notC])
+
+    obj = MultiOR([ob1.Output,ob2.Output,ob3.Output,ob4.Output,ob5.Output])
+
+    return obj.Output    
+
+def isG(n):
+    # Stores the values
+    # [A,B,C,D]
+    A,B,C,D = n[0], n[1], n[2], n[3]
+    notA = NOT([A])
+    notB = NOT([B])
+    notC = NOT([C])
+    notD = NOT([D])
+
+    ob1 = AND([A,notB])
+    ob2 = AND([C,notD])
+    ob3 = AND([A,C])
+    ob4 = AND([A,D])
+    ob5 = AND([notB,C])
+    ob6 = AND3([notA,B,notC])
+
+    obj = MultiOR([ob1.Output,ob2.Output,ob3.Output,ob4.Output,ob5.Output,ob6.Output])
+
+    return obj.Output
+
+def display(In):
+    pass
+
 
     
