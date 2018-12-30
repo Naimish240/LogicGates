@@ -2,8 +2,7 @@
 
 ### WIP ####
 
-from GatesWithNAND import *
-
+from GatesWithNAND import NOT,AND,AND3,MultiOR
 
 
 '''
@@ -128,17 +127,17 @@ from GatesWithNAND import *
 
 '''
 
-
+class Display(object):
 # The list of 7 segment stuff
-temp = [        
-        # Add '\n' at end of each line when adding two numbers
-                               #        0   1   2   3
-                                
-        [" ","_"," "," "],     #   0    0   1   2   3
-        ["|","_","|"," "],     #   1    4   5   6   7
-        ["|"," ","|"," "],     #   2    8   9   10  11
-        [" ","‾"," "," "]      #   3    12  13  14  15
-    ]
+    temp = [        
+            # Add '\n' at end of each line when adding two numbers
+                                #        0   1   2   3
+                                    
+            [" ","_"," "," "],     #   0    0   1   2   3
+            ["|","_","|"," "],     #   1    4   5   6   7
+            ["|"," ","|"," "],     #   2    8   9   10  11
+            [" ","‾"," "," "]      #   3    12  13  14  15
+        ]
 
 # Co-ord is temp[i//4][i%4]
 
@@ -156,10 +155,10 @@ def isA(n):
     # Stores the values
     # [A,B,C,D]
     A,B,C,D = n[0], n[1], n[2], n[3]
-    notA = NOT([A])
-    notB = NOT([B])
-    notC = NOT([C])
-    notD = NOT([D])
+    notA = NOT([A]).Output
+    notB = NOT([B]).Output
+    notC = NOT([C]).Output
+    notD = NOT([D]).Output
 
     ob1 = AND([notB,notD])
     ob2 = AND([notA,C])
@@ -177,10 +176,10 @@ def isB(n):
     # Stores the values
     # [A,B,C,D]
     A,B,C,D = n[0], n[1], n[2], n[3]
-    notA = NOT([A])
-    notB = NOT([B])
-    notC = NOT([C])
-    notD = NOT([D])
+    notA = NOT([A]).Output
+    notB = NOT([B]).Output
+    notC = NOT([C]).Output
+    notD = NOT([D]).Output
 
     ob1 = AND([notB,notD])
     ob2 = AND3([notA,notC,notD])
@@ -196,9 +195,9 @@ def isC(n):
     # Stores the values
     # [A,B,C,D]
     A,B,C,D = n[0], n[1], n[2], n[3]
-    notA = NOT([A])
-    notB = NOT([B])
-    notC = NOT([C])
+    notA = NOT([A]).Output
+    notB = NOT([B]).Output
+    notC = NOT([C]).Output
 
     ob1 = AND([notA,notC])
     ob2 = AND([notA,D])
@@ -214,10 +213,10 @@ def isD(n):
     # Stores the values
     # [A,B,C,D]
     A,B,C,D = n[0], n[1], n[2], n[3]
-    notA = NOT([A])
-    notB = NOT([B])
-    notC = NOT([C])
-    notD = NOT([D])
+    notA = NOT([A]).Output
+    notB = NOT([B]).Output
+    notC = NOT([C]).Output
+    notD = NOT([D]).Output
 
     ob1 = AND([notB,notD])
     ob2 = AND([C,notD])
@@ -233,8 +232,8 @@ def isE(n):
     # Stores the values
     # [A,B,C,D]
     A,B,C,D = n[0], n[1], n[2], n[3]
-    notB = NOT([B])
-    notD = NOT([D])
+    notB = NOT([B]).Output
+    notD = NOT([D]).Output
 
     ob1 = AND([notB,notD])
     ob2 = AND([C,notD])
@@ -249,10 +248,10 @@ def isF(n):
     # Stores the values
     # [A,B,C,D]
     A,B,C,D = n[0], n[1], n[2], n[3]
-    notA = NOT([A])
-    notB = NOT([B])
-    notC = NOT([C])
-    notD = NOT([D])
+    notA = NOT([A]).Output
+    notB = NOT([B]).Output
+    notC = NOT([C]).Output
+    notD = NOT([D]).Output
 
     ob1 = AND([notC,notD])
     ob2 = AND([A,notB])
@@ -268,10 +267,10 @@ def isG(n):
     # Stores the values
     # [A,B,C,D]
     A,B,C,D = n[0], n[1], n[2], n[3]
-    notA = NOT([A])
-    notB = NOT([B])
-    notC = NOT([C])
-    notD = NOT([D])
+    notA = NOT([A]).Output
+    notB = NOT([B]).Output
+    notC = NOT([C]).Output
+    notD = NOT([D]).Output
 
     ob1 = AND([A,notB])
     ob2 = AND([C,notD])
@@ -284,8 +283,39 @@ def isG(n):
 
     return obj.Output
 
-def display(In):
-    pass
+def SingleDisplay(n):
 
+    temp_disp = Display.temp[:]
 
+    if isA(n) == 0:
+        temp_disp[key['A']//4][key['A']%4] = " "
+
+    if isB(n) == 0:
+        temp_disp[key['B']//4][key['B']%4] = " "
+
+    if isC(n) == 0:
+        temp_disp[key['C']//4][key['C']%4] = " "
+
+    if isD(n) == 0:
+        temp_disp[key['D']//4][key['D']%4] = " "
+
+    if isE(n) == 0:
+        temp_disp[key['E']//4][key['E']%4] = " "
+
+    if isF(n) == 0:
+        temp_disp[key['F']//4][key['F']%4] = " "
+
+    if isG(n) == 0:
+        temp_disp[key['G']//4][key['G']%4] = " "
+
+    for i in temp_disp:
+        for j in i:
+            print(j,end = '')
+        print()
+
+if __name__ == '__main__':
+    SingleDisplay([1,0,0,0])
+    SingleDisplay([0,1,0,0])
+    SingleDisplay([0,0,0,1])
     
+        
