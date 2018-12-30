@@ -4,10 +4,9 @@
 
 from GatesWithNAND import *
 
-vals = [None,None,None,None,None,None,None]
 
-def display():
-    '''
+
+'''
     Note: 0 ---> on
           1 ---> off
 
@@ -127,21 +126,21 @@ def display():
     3    | 
     4      
 
-    '''
+'''
 
 
-    # the list of 7 segment stuff
-    temp = [        
-        # Replace '\n' with ' ' when adding two numbers
-                                #        0   1   2   3
+# The list of 7 segment stuff
+temp = [        
+        # Add '\n' at end of each line when adding two numbers
+                               #        0   1   2   3
                                 
-        [" ","_"," ","\n"],     #   0    0   1   2   3
-        ["|","_","|","\n"],     #   1    4   5   6   7
-        ["|"," ","|","\n"],     #   2    8   9   10  11
-        [" ","‾"," ","\n"]      #   3    12  13  14  15
+        [" ","_"," "," "],     #   0    0   1   2   3
+        ["|","_","|"," "],     #   1    4   5   6   7
+        ["|"," ","|"," "],     #   2    8   9   10  11
+        [" ","‾"," "," "]      #   3    12  13  14  15
     ]
 
-    # Co-ord is temp[i//4][i%4]
-    key = [1,6,10,13,8,4,5] # ABCDEFG
+# Co-ord is temp[i//4][i%4]
+key = [1,6,10,13,8,4,5] # ABCDEFG
 
     
