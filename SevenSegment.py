@@ -312,10 +312,11 @@ def SingleDisplay(n):
         for j in i:
             print(j,end = '')
         print()
-
+        
 if __name__ == '__main__':
     SingleDisplay([1,0,0,0])
     SingleDisplay([0,1,0,0])
     SingleDisplay([0,0,0,1])
+    SingleDisplay([0,0,1,1])
     
         
