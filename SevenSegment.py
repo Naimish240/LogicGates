@@ -4,7 +4,6 @@
 
 from GatesWithNAND import NOT,AND,AND3,MultiOR
 
-
 '''
     Note: 0 ---> on
           1 ---> off
@@ -131,7 +130,7 @@ class Display(object):
 # The list of 7 segment stuff
     temp = [        
             # Add '\n' at end of each line when adding two numbers
-                                #        0   1   2   3
+                                   #        0   1   2   3
                                     
             [" ","_"," "," "],     #   0    0   1   2   3
             ["|","_","|"," "],     #   1    4   5   6   7
@@ -312,11 +311,10 @@ def SingleDisplay(n):
         for j in i:
             print(j,end = '')
         print()
-        
+
 if __name__ == '__main__':
     SingleDisplay([1,0,0,0])
     SingleDisplay([0,1,0,0])
     SingleDisplay([0,0,0,1])
     SingleDisplay([0,0,1,1])
-    
-        
+       
