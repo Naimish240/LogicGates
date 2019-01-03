@@ -1,7 +1,7 @@
 ### Seven Segment Display
 
 ### WIP ####
-
+from copy import deepcopy
 from GatesWithNAND import NOT,AND,AND3,MultiOR
 
 '''
@@ -284,7 +284,7 @@ def isG(n):
 
 def SingleDisplay(n):
 
-    temp_disp = Display.temp[:]
+    temp_disp = deepcopy(Display.temp)
 
     if isA(n) == 0:
         temp_disp[key['A']//4][key['A']%4] = " "
