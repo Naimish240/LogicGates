@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="LogicGates",
-    version="1.0.0",
+    version="1.0.1",
     author="Naimish Mani B",
     author_email="nbalaji.buisness@gmail.com",
     description="A small pet project of mine to implement Logic Gates in python through using NAND gate only",
