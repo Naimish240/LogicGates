@@ -2,7 +2,7 @@
 
 ### WIP ####
 from copy import deepcopy
-from GatesWithNAND import NOT,AND,AND3,MultiOR
+from LogicGates import NOT,AND,AND3,MultiOR
 
 '''
     Note: 0 ---> on
@@ -126,17 +126,16 @@ from GatesWithNAND import NOT,AND,AND3,MultiOR
 
 '''
 
-class Display(object):
-# The list of 7 segment stuff
-    temp = [        
-            # Add '\n' at end of each line when adding two numbers
-                                   #        0   1   2   3
-                                    
-            [" ","_"," "," "],     #   0    0   1   2   3
-            ["|","_","|"," "],     #   1    4   5   6   7
-            ["|"," ","|"," "],     #   2    8   9   10  11
-            [" ","‾"," "," "]      #   3    12  13  14  15
-        ]
+
+Display = [        
+        # Add '\n' at end of each line when adding two numbers
+                               #        0   1   2   3
+                                
+        [" ","_"," "," "],     #   0    0   1   2   3
+        ["|","_","|"," "],     #   1    4   5   6   7
+        ["|"," ","|"," "],     #   2    8   9   10  11
+        [" ","‾"," "," "]      #   3    12  13  14  15
+    ]
 
 # Co-ord is temp[i//4][i%4]
 
@@ -284,7 +283,8 @@ def isG(n):
 
 def SingleDisplay(n):
 
-    temp_disp = deepcopy(Display.temp)
+    temp_disp = deepcopy(Display)
+    print(isA(n), isB(n), isC(n), isD(n), isE(n), isF(n))
 
     if isA(n) == 0:
         temp_disp[key['A']//4][key['A']%4] = " "
@@ -313,8 +313,20 @@ def SingleDisplay(n):
         print()
 
 if __name__ == '__main__':
-    SingleDisplay([1,0,0,0])
-    SingleDisplay([0,1,0,0])
+    SingleDisplay([0,0,0,0])
     SingleDisplay([0,0,0,1])
+    SingleDisplay([0,0,1,0])
     SingleDisplay([0,0,1,1])
+    SingleDisplay([0,1,0,0])
+    SingleDisplay([0,1,0,1])
+    SingleDisplay([0,1,1,0])
+    SingleDisplay([0,1,1,1])
+    SingleDisplay([1,0,0,0])
+    SingleDisplay([1,0,0,1])
+    SingleDisplay([1,0,1,0])
+    SingleDisplay([1,0,1,1])
+    SingleDisplay([1,1,0,0])
+    SingleDisplay([1,1,0,1])
+    SingleDisplay([1,1,1,0])
+    SingleDisplay([1,1,1,1])
        
